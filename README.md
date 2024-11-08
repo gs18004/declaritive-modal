@@ -67,6 +67,18 @@ type ModalWrapperProps = {
 };
 
 const ModalWrapper = ({ children, close }: ModalWrapperProps) => {
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        close();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [close]);
+
   return (
     <ModalPortal>
       <div
@@ -290,21 +302,9 @@ const NameModal = ({ close }: NameModalProps) => {
       lastName: lastNameInputRef.current?.value ?? '',
     });
   };
-  const closeModalWithoutSave = useCallback(() => {
+  const closeModalWithoutSave = () => {
     close(null);
-  }, [close]);
-
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        closeModalWithoutSave();
-      }
-    };
-    window.addEventListener('keydown', handleEsc);
-    return () => {
-      window.removeEventListener('keydown', handleEsc);
-    };
-  }, [closeModalWithoutSave]);
+  };
 
   return (
     <form className={styles.Container} onSubmit={handleSubmit}>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import styles from './NameModal.module.css';
 
@@ -20,21 +20,9 @@ const NameModal = ({ close }: NameModalProps) => {
       lastName: lastNameInputRef.current?.value ?? '',
     });
   };
-  const closeModalWithoutSave = useCallback(() => {
+  const closeModalWithoutSave = () => {
     close(null);
-  }, [close]);
-
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        closeModalWithoutSave();
-      }
-    };
-    window.addEventListener('keydown', handleEsc);
-    return () => {
-      window.removeEventListener('keydown', handleEsc);
-    };
-  }, [closeModalWithoutSave]);
+  };
 
   return (
     <form className={styles.Container} onSubmit={handleSubmit}>
