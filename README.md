@@ -91,7 +91,7 @@ const ModalWrapper = ({ children, close }: ModalWrapperProps) => {
 export default ModalWrapper;
 ```
 
-잠깐 `ModalPortal`을 보고 가자면, 다음과 같다. `createPortal`로 Portal을 만들어주고 있다. 이 Portal을 사용하기 위해서는 `index.html`의 body에 `*<*div id="modal"*></*div*>*`를 추가해야 한다.
+잠깐 `ModalPortal`을 보고 가자면, 다음과 같다. `createPortal`로 Portal을 만들어주고 있다. 이 Portal을 사용하기 위해서는 `index.html`의 body에 `<div id="modal"></div>`를 추가해야 한다.
 
 ```tsx
 // ModalPortal.tsx
